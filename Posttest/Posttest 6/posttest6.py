@@ -1,174 +1,176 @@
-data_takjil = {}
+
 print("=" * 55)
 print("     PROGRAM PEMBAGIAN TAKJIL")
 print("=" * 55)
 
-data_takjil = []
+data_takjil = {}
 counter = 1
 
 while True:
     print("\n" + "-" * 55)
     print("MENU: 1.Tambahkan  2.Membaca  3.Perbarui  4.Hapus  5.Keluar")
     print("-" * 55)
-    
+
     pilihan = input("Pilih menu: ")
-    
+
+    # CREATE
     if pilihan == "1":
         print("\n-- TAMBAH DATA BARU --")
-        
+
         tanggal = input("Tanggal : ")
-        waktu   = input("Waktu   : ")
-        lokasi  = input("Lokasi  : ")
-        jenis   = input("Jenis   : ")
+        waktu = input("Waktu   : ")
+        lokasi = input("Lokasi  : ")
+        jenis = input("Jenis   : ")
         jml_inp = input("Jumlah  : ")
-        pj      = input("PJ      : ")
-        
+        pj = input("PJ      : ")
+
         if jml_inp.isdigit():
             jumlah = int(jml_inp)
         else:
             jumlah = 0
-        
-        data_baru = (counter, tanggal, waktu, lokasi, jenis, jumlah, pj)
-        data_takjil.append(data_baru)
-        
+            print("Jumlah bukan angka. Jumlah disimpan sebagai 0.")
+
+        data_takjil[counter] = {
+            "tanggal": tanggal,
+            "waktu": waktu,
+            "lokasi": lokasi,
+            "jenis": jenis,
+            "jumlah": jumlah,
+            "pj": pj
+        }
+
         print("Data No.", counter, "ditambahkan!")
         counter = counter + 1
-    
+
+    # READ
     elif pilihan == "2":
         print("\n-- DAFTAR DATA --")
-        
+
         if len(data_takjil) == 0:
             print("Data kosong.")
         else:
-            print("-" * 65)
-            print(f"{'No':<3} {'Tgl':<10} {'Wkt':<6} {'Lokasi':<14} {'Jenis':<10} {'Jml':<4} {'PJ'}")
-            print("-" * 65)
-            
-            i = 0
-            while i < len(data_takjil):
-                d = data_takjil[i]
-                print(d[0], "", d[1], "", d[2], "", d[3], "", d[4], "", d[5], "", d[6])
-                i = i + 1
-            
-            print("-" * 65)
+            print("-" * 90)
+            print(f"{'No':<4} {'Tanggal':<12} {'Waktu':<8} "
+                  f"{'Lokasi':<18} {'Jenis':<15} {'Jumlah':<8} {'PJ'}")
+            print("-" * 90)
+
+            for no, d in data_takjil.items():
+                print(f"{no:<4} {d['tanggal']:<12} "
+                      f"{d['waktu']:<8} {d['lokasi']:<18} "
+                      f"{d['jenis']:<15} {d['jumlah']:<8} {d['pj']}")
+
+            print("-" * 90)
             print("Total:", len(data_takjil), "data")
 
+    # UPDATE
     elif pilihan == "3":
         print("\n-- UBAH DATA --")
-        
+
         if len(data_takjil) == 0:
             print("Data kosong.")
         else:
             print("\nDaftar:")
-            i = 0
-            while i < len(data_takjil):
-                d = data_takjil[i]
-                print("  [", i+1, "]", d[0], "|", d[1], "|", d[3], "|", d[4])
-                i = i + 1
-            
+
+            for no, d in data_takjil.items():
+                print(f"  [{no}] {d['tanggal']} | "
+                      f"{d['lokasi']} | {d['jenis']}")
+
             inp = input("\nPilih nomor yang diubah: ")
-            
+
             if inp.isdigit():
                 no = int(inp)
-                
-                if no >= 1 and no <= len(data_takjil):
-                    idx = no - 1
 
-                    old = data_takjil[idx]
-                    
+                if no in data_takjil:
+                    old = data_takjil[no]
+
                     print("\nData saat ini:")
-                    print("  1. Tanggal :", old[1])
-                    print("  2. Waktu   :", old[2])
-                    print("  3. Lokasi  :", old[3])
-                    print("  4. Jenis   :", old[4])
-                    print("  5. Jumlah  :", old[5])
-                    print("  6. PJ      :", old[6])
-                    
-                    print("\nMasukkan nilai BARU (tekan Enter jika tidak diubah):")
+                    print("  1. Tanggal :", old["tanggal"])
+                    print("  2. Waktu   :", old["waktu"])
+                    print("  3. Lokasi  :", old["lokasi"])
+                    print("  4. Jenis   :", old["jenis"])
+                    print("  5. Jumlah  :", old["jumlah"])
+                    print("  6. PJ      :", old["pj"])
 
-                    new_tgl = input("  Tanggal baru [" + old[1] + "]: ")
-                    new_wkt = input("  Waktu baru   [" + old[2] + "]: ")
-                    new_lok = input("  Lokasi baru  [" + old[3] + "]: ")
-                    new_jns = input("  Jenis baru   [" + old[4] + "]: ")
-                    new_jml = input("  Jumlah baru  [" + str(old[5]) + "]: ")
-                    new_pj  = input("  PJ baru      [" + old[6] + "]: ")
+                    print("\nMasukkan nilai BARU "
+                          "(tekan Enter jika tidak diubah):")
 
-                    if new_tgl == "":
-                        final_tgl = old[1]
-                    else:
-                        final_tgl = new_tgl
-                    
-                    if new_wkt == "":
-                        final_wkt = old[2]
-                    else:
-                        final_wkt = new_wkt
-                    
-                    if new_lok == "":
-                        final_lok = old[3]
-                    else:
-                        final_lok = new_lok
-                    
-                    if new_jns == "":
-                        final_jns = old[4]
-                    else:
-                        final_jns = new_jns
-                    
-                    if new_jml == "":
-                        final_jml = old[5]
-                    elif new_jml.isdigit():
-                        final_jml = int(new_jml)
-                    else:
-                        final_jml = old[5]
-                    
-                    if new_pj == "":
-                        final_pj = old[6]
-                    else:
-                        final_pj = new_pj
+                    new_tgl = input(
+                        "  Tanggal baru [" + old["tanggal"] + "]: ")
+                    new_wkt = input(
+                        "  Waktu baru   [" + old["waktu"] + "]: ")
+                    new_lok = input(
+                        "  Lokasi baru  [" + old["lokasi"] + "]: ")
+                    new_jns = input(
+                        "  Jenis baru   [" + old["jenis"] + "]: ")
+                    new_jml = input(
+                        "  Jumlah baru  [" + str(old["jumlah"]) + "]: ")
+                    new_pj = input(
+                        "  PJ baru      [" + old["pj"] + "]: ")
 
-                    data_baru = (old[0], final_tgl, final_wkt, final_lok, final_jns, final_jml, final_pj)
-                    data_takjil[idx] = data_baru
-                    
-                    print("\nData BERHASIL diubah!")
-                    print("    Verifikasi:", data_takjil[idx])
-                    
+                    if new_tgl != "":
+                        old["tanggal"] = new_tgl
+
+                    if new_wkt != "":
+                        old["waktu"] = new_wkt
+
+                    if new_lok != "":
+                        old["lokasi"] = new_lok
+
+                    if new_jns != "":
+                        old["jenis"] = new_jns
+
+                    if new_jml != "":
+                        if new_jml.isdigit():
+                            old["jumlah"] = int(new_jml)
+                        else:
+                            print("Jumlah harus berupa angka. "
+                                  "Jumlah lama tetap digunakan.")
+
+                    if new_pj != "":
+                        old["pj"] = new_pj
+
+                    print("\nData berhasil diperbarui!")
+                    print("Verifikasi:", data_takjil[no])
+
                 else:
                     print("Nomor tidak valid.")
             else:
                 print("Input harus angka.")
 
+    # DELETE
     elif pilihan == "4":
         print("\n-- HAPUS DATA --")
-        
+
         if len(data_takjil) == 0:
             print("Data kosong.")
         else:
-            i = 0
-            while i < len(data_takjil):
-                d = data_takjil[i]
-                print("  [", i+1, "]", d[0], "|", d[1], "|", d[3])
-                i = i + 1
-            
+            for no, d in data_takjil.items():
+                print(f"  [{no}] {d['tanggal']} | "
+                      f"{d['lokasi']} | {d['jenis']}")
+
             inp = input("\nPilih nomor yang dihapus: ")
-            
+
             if inp.isdigit():
                 no = int(inp)
-                
-                if no >= 1 and no <= len(data_takjil):
-                    idx = no - 1
+
+                if no in data_takjil:
                     konfirmasi = input("Yakin hapus? (y): ")
-                    
-                    if konfirmasi == "y":
+
+                    if konfirmasi.lower() == "y":
                         del data_takjil[no]
                         print("Data terhapus.")
+                    else:
+                        print("Penghapusan dibatalkan.")
                 else:
                     print("Nomor tidak valid.")
             else:
                 print("Input harus angka.")
 
+    # EXIT
     elif pilihan == "5":
         print("\nTerima kasih!")
         break
-    
+
     else:
         print("Pilih 1-5.")
 
