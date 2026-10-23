@@ -1,4 +1,3 @@
-
 print("=" * 55)
 print("     PROGRAM PEMBAGIAN TAKJIL")
 print("=" * 55)
@@ -13,7 +12,6 @@ while True:
 
     pilihan = input("Pilih menu: ")
 
-    # CREATE
     if pilihan == "1":
         print("\n-- TAMBAH DATA BARU --")
 
@@ -42,7 +40,6 @@ while True:
         print("Data No.", counter, "ditambahkan!")
         counter = counter + 1
 
-    # READ
     elif pilihan == "2":
         print("\n-- DAFTAR DATA --")
 
@@ -62,7 +59,6 @@ while True:
             print("-" * 90)
             print("Total:", len(data_takjil), "data")
 
-    # UPDATE
     elif pilihan == "3":
         print("\n-- UBAH DATA --")
 
@@ -137,7 +133,6 @@ while True:
             else:
                 print("Input harus angka.")
 
-    # DELETE
     elif pilihan == "4":
         print("\n-- HAPUS DATA --")
 
@@ -166,7 +161,6 @@ while True:
             else:
                 print("Input harus angka.")
 
-    # EXIT
     elif pilihan == "5":
         print("\nTerima kasih!")
         break
